@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Usuario {
+    private String nome;
+    private String email;
+    private String senha;
+    private List<Endereco> enderecos;
+    private String cpf;
+    private boolean ativo;
+    private static List<Usuario> usuarios = new ArrayList<>();
+
+    public Usuario(String nome, String email, String senha, String cpf) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.ativo = true;
+        this.enderecos = new ArrayList<>();
+    }
+
+    public void cadastrarUsuario() {
+        usuarios.add(this);
+    }
+
+    public void removerUsuario() {
+        usuarios.remove(this);
+    }
+
+    public void alterarUsuario(String nome, String email, String senha, String cpf) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+    }
+    
+    public void cadastrarEndereco(String cep, String logradouro, String cidade, String estado, String bairro) {
+        Endereco novoEndereco = new Endereco(cep, logradouro, cidade, estado, bairro);
+        enderecos.add(novoEndereco);
+    }
+    
+    public void editarEndereco(int indiceEndereco, String cep, String logradouro, String cidade, String estado, String bairro) {
+        Endereco enderecoEditado = enderecos.get(indiceEndereco);
+        enderecoEditado.setCep(cep);
+        enderecoEditado.setLogradouro(logradouro);
+        enderecoEditado.setCidade(cidade);
+        enderecoEditado.setEstado(estado);
+        enderecoEditado.setBairro(bairro);
+    }
+    
+    public void removerEndereco(int indiceEndereco) {
+        enderecos.remove(indiceEndereco);
+    }
+    
+    public List<Endereco> listarEnderecos() {
+        return enderecos;
+    }
+
+    // Getters e setters omitidos por brevidade
+    
+    public class Endereco {
+        private String cep;
+        private String logradouro;
+        private String cidade;
+        private String estado;
+        private String bairro;
+
+        public Endereco(String cep, String logradouro, String cidade, String estado, String bairro) {
+            this.cep = cep;
+            this.logradouro = logradouro;
+            this.cidade = cidade;
+            this.estado = estado;
+            this.bairro = bairro;
+        }
+
+        // Getters e setters omitidos por brevidade
+        
+    }
+}
